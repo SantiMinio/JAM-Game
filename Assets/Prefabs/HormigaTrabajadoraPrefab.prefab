@@ -173,7 +173,7 @@ MonoBehaviour:
   obsLayers:
     serializedVersion: 2
     m_Bits: 513
-  movementLerp: 3
+  movementLerp: 4
   anim: {fileID: 2426860215590277584}
   animEvent: {fileID: 5389489678008522753}
   isAction: 0

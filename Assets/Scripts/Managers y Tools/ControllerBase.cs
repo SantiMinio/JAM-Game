@@ -20,7 +20,7 @@ public class ControllerBase : MonoBehaviour, IPauseable
     private void Start()
     {
         gridSpacing = GameManager.Instance.gridSpacing;
-        //GameManager.Instance.StopMove += () => startCD = true;
+        GameManager.Instance.StopMove += () => startCD = true;
         GameManager.Instance.pauseManager.AddToPause(this);
     }
 
@@ -48,13 +48,13 @@ public class ControllerBase : MonoBehaviour, IPauseable
         {
             MovementInput(new Vector3(0, 0, gridSpacing * ClampToInt(Input.GetAxis("Vertical"))));
             movementInCD = true;
-            startCD = true;
+            //startCD = true;
         }
         else if (Input.GetAxis("Horizontal") != 0)
         {
             MovementInput(new Vector3(gridSpacing * ClampToInt(Input.GetAxis("Horizontal")), 0, 0));
             movementInCD = true;
-            startCD = true;
+            //startCD = true;
         }
     }
 

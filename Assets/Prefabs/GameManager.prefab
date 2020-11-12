@@ -4238,7 +4238,6 @@ MonoBehaviour:
   gridSpacing: 1
   uiManager: {fileID: 2213160917961010559}
   timeToRestart: 2
-  pauseManager: {fileID: 0}
 --- !u!114 &4715024250557282929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4251,7 +4250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c07e1d9f7d9296e45851587a02d876f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementCooldown: 0.5
+  movementCooldown: 0.1
   playing: 1
 --- !u!82 &4465645184681014550
 AudioSource:

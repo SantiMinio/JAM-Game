@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     float stopTimer;
     private CameraFollow cam;
 
+    int antMovement = 0;
+
     public PauseManager pauseManager = new PauseManager();
 
     int collectorAnts;
@@ -81,17 +83,6 @@ public class GameManager : MonoBehaviour
             MusicManager.instance.PauseMusic();
             pauseManager.Pause();
         }
-
-        if (stopCD)
-        {
-            stopTimer += Time.deltaTime;
-
-            if (stopTimer >= 0.1f)
-            {
-                stopCD = false;
-                stopTimer = 0;
-            }
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -107,6 +98,14 @@ public class GameManager : MonoBehaviour
         antLeave += 1;
         if (_ant.GetComponent<CollectorAnt>()) collectorAnts -= 1;
         CheckAntAmmount();
+
+        antMovement += 1;
+
+        if (antMovement >= antCount)
+        {
+            antMovement = 0;
+            StopMove();
+        }
     }
 
     public void DropItem()
@@ -180,9 +179,15 @@ public class GameManager : MonoBehaviour
 
     public void StopMovementAnt()
     {
-        if (stopCD) return;
-        StopMove();
-        stopCD = true;
+        //if (stopCD) return;
+
+        antMovement += 1;
+
+        if (antMovement >= antCount)
+        {
+            antMovement = 0;
+            StopMove();
+        }
     }
 
     IEnumerator FinishCoroutine(bool win)
