@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] LevelSelector[] myLevels = new LevelSelector[0];
     [SerializeField] AudioMixer mixerMaster = null;
 
+
     private void Start()
     {
         if (BinarySerialization.IsFileExist(FileName)) data = BinarySerialization.Deserialize<SaveData>(FileName);
@@ -32,6 +33,23 @@ public class MainMenu : MonoBehaviour
         mixerMaster.SetFloat("Volume", settings.volume);
         Screen.SetResolution(settings.resolutionWidht, settings.resolutionHeight, settings.fullScreen);
         QualitySettings.SetQualityLevel(settings.qualityIndex);
+        if (!data.creditsPass)
+        {
+            bool allLevelsClear = true;
+
+            for (int i = 0; i < myLevels.Length; i++)
+            {
+                if (!data.levelsClear[i]) { allLevelsClear = false; break; }
+            }
+
+            if (allLevelsClear)
+            {
+                GetComponent<Buttons>().Credits();
+                data.creditsPass = true;
+            }
+        }
+
+        BinarySerialization.Serialize(FileName, data);
     }
 
     public void CompleteLevelSelector()

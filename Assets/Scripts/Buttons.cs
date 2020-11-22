@@ -10,6 +10,9 @@ public class Buttons : MonoBehaviour
     [SerializeField] GameObject mainScene = null;
     [SerializeField] GameObject levelSelector = null;
     [SerializeField] GameObject settingsScreen = null;
+    [SerializeField] MusicManager myMusic = null;
+
+    [SerializeField] AudioClip exitSound = null;
 
     private void Awake()
     {
@@ -20,11 +23,14 @@ public class Buttons : MonoBehaviour
     }
     public void LevelSelector(int levelIndex)
     {
+        GetComponent<AudioSource>().Play();
+        Instantiate(myMusic.gameObject);
         SceneManager.LoadScene(levelIndex);
     }
 
     public void Back()
     {
+        GetComponent<AudioSource>().Play();
         mainScene.SetActive(true);
         levelSelector.SetActive(false);
     }
@@ -33,14 +39,17 @@ public class Buttons : MonoBehaviour
     {
         mainScene.SetActive(false);
         levelSelector.SetActive(true);
+        GetComponent<AudioSource>().Play();
     }
     public void Options()
     {
         settingsScreen.SetActive(true);
         mainScene.SetActive(false);
+        GetComponent<AudioSource>().Play();
     }
     public void Credits()
     {
+        GetComponent<AudioSource>().Play();
         if (names[0].activeSelf)
         {
             for (int i = 0; i < names.Length; i++)
@@ -58,6 +67,16 @@ public class Buttons : MonoBehaviour
     }
     public void ExitGame()
     {
+        var aS = GetComponent<AudioSource>();
+        aS.Stop();
+        aS.clip = exitSound;
+        aS.Play();
+        StartCoroutine(ExitDelay());
+    }
+
+    IEnumerator ExitDelay()
+    {
+        yield return new WaitForSeconds(1);
         Application.Quit();
     }
 

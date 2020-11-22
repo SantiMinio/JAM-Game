@@ -37,22 +37,22 @@ public class Settings : MonoBehaviour
         }
 
         fullScreenUI.isOn = data.fullScreen;
-        volumeSlider.value = data.volume + 80;
+        volumeSlider.value = data.volumeSlider;
         resolutionDrop.ClearOptions();
         resolutionDrop.AddOptions(resolutionsString);
         resolutionDrop.value = current;
         resolutionDrop.RefreshShownValue();
-
         qualityDrop.value = data.qualityIndex;
         qualityDrop.RefreshShownValue();
     }
 
     public void SetVolume(float value)
     {
-        masterAudio.SetFloat("Volume", value - 80);
-
-        data.volume = value - 80;
-
+        var logValue = Mathf.Log10(value) * 20;
+        data.volumeSlider = value;
+        masterAudio.SetFloat("Volume", logValue);
+        Debug.Log(logValue);
+        data.volume = logValue;
         BinarySerialization.Serialize(SettingsDataName, data);
     }
 
@@ -72,7 +72,6 @@ public class Settings : MonoBehaviour
 
         data.resolutionWidht = change.width;
         data.resolutionHeight = change.height;
-        Debug.Log("entro");
 
         BinarySerialization.Serialize(SettingsDataName, data);
     }
@@ -108,7 +107,7 @@ public class Settings : MonoBehaviour
         }
 
         fullScreenUI.isOn = data.fullScreen;
-        volumeSlider.value = data.volume + 80;
+        volumeSlider.value = data.volume ;
 
         resolutionDrop.RefreshShownValue();
  

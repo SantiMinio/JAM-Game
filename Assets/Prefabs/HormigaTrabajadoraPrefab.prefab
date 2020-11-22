@@ -176,6 +176,7 @@ MonoBehaviour:
   movementLerp: 4
   anim: {fileID: 2426860215590277584}
   animEvent: {fileID: 5389489678008522753}
+  splashSound: {fileID: 8300000, guid: 2dfac1093c1ca4941a98de7034c90dc1, type: 3}
   isAction: 0
   deadSound: {fileID: 8300000, guid: bb90e967dcf217642b85689e1dac5299, type: 3}
   collectableParent: {fileID: 3130532864953321004}

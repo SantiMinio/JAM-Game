@@ -7,6 +7,7 @@ using UnityEngine;
 public class SettingsData
 {
     public float volume = 0;
+    public float volumeSlider = 0;
     public int qualityIndex = 5;
     public bool fullScreen = true;
     public int resolutionWidht = 1920;

@@ -7,8 +7,11 @@ public class MusicManager : MonoBehaviour
 {
     public static MusicManager instance;
 
-    public AudioSource music;
-    // Start is called before the first frame update
+    [SerializeField] AudioSource music = null;
+
+    [SerializeField] List<int> levelToChange = new List<int>();
+    [SerializeField] List<AudioClip> musics = new List<AudioClip>();
+
     void Awake()
     {
         MusicManager[] array = FindObjectsOfType<MusicManager>().Where(x => x!=this).ToArray();
@@ -16,7 +19,8 @@ public class MusicManager : MonoBehaviour
         if (array == null || array.Length<1)
         {
             instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(gameObject);
+            music.Play();
         }
         else Destroy(gameObject);
     }
@@ -34,6 +38,25 @@ public class MusicManager : MonoBehaviour
     public void DestroyThis()
     {
         Destroy(this.gameObject);
+    }
+
+    public void EnterToLevel(int level)
+    {
+        AudioClip current = null;
+
+        for (int i = 0; i < levelToChange.Count; i++)
+        {
+            if (levelToChange[i] <= level)
+                current = musics[i];
+        }
+
+        if (music.clip == current) music.UnPause();
+        else
+        {
+            music.Stop();
+            music.clip = current;
+            music.Play();
+        }
     }
   
 }

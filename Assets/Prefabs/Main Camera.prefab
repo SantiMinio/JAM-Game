@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4492016432817272029}
-  m_LocalRotation: {x: 0.3277435, y: 0.23371586, z: -0.08115655, w: 0.9117975}
+  m_LocalRotation: {x: 0.5210921, y: 0.033482615, z: -0.012776428, w: 0.85274774}
   m_LocalPosition: {x: -5.8081565, y: 12.640399, z: -7.4031897}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ants: []
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 7, z: -3}
   smoothTime: 1
-  minZoom: 70
-  maxZoom: 40
+  minZoom: 86.31
+  maxZoom: 54
   zoomLimiter: 0.52

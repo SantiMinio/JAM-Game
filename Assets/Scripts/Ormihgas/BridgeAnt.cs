@@ -22,11 +22,12 @@ public class BridgeAnt : GenericAnt
             base.Falling();
             return;
         }
-
+        anim.SetTrigger("Jump");
         var cam = Camera.main.GetComponent<CameraFollow>();
         cam.ants.Remove(this);
         GameManager.Instance.DeadAnt(Move, this);
         StartCoroutine(FallCoroutine());
+        PlaySound(splashSound);
     }
 
     IEnumerator FallCoroutine()

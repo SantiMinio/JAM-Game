@@ -50,7 +50,7 @@ public class TankAnt : GenericAnt
         isAction = true;
         currentTarget = _item;
         anim.SetTrigger("Grab");
-        PlaySound(attackSound[Random.Range(0,3)]);
+        PlaySound(attackSound[Random.Range(0,attackSound.Length)]);
         hitPs.Play();
     }
 

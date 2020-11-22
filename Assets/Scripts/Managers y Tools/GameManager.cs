@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioSource audioSource = null;
     [SerializeField] AudioClip winSound = null;
     [SerializeField] AudioClip loseSound = null;
+    [SerializeField] GameObject leavePart;
     int totalCollectables;
     public float gridSpacing = 1;
     int antCount;
@@ -40,7 +41,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        MusicManager.instance.ResumeMusic();
+        MusicManager.instance?.EnterToLevel(SceneManager.GetActiveScene().buildIndex);
 
         cam = Camera.main.GetComponent<CameraFollow>();
         uiManager.RefreshCollectabeAmmount(collectablesAmmount, minimunCollect);
@@ -93,6 +94,7 @@ public class GameManager : MonoBehaviour
     public void AntLeaving(GenericAnt _ant)
     {
         cam.ants.Remove(_ant);
+        leavePart.SetActive(true);
         _ant.Off(controller);
         antCount -= 1;
         antLeave += 1;
@@ -153,7 +155,7 @@ public class GameManager : MonoBehaviour
     void Lose()
     {
         controller.playing = false;
-        MusicManager.instance.music.Stop();
+        MusicManager.instance.PauseMusic();
         audioSource.clip = loseSound;
         if(!audioSource.isPlaying) audioSource.Play();
 

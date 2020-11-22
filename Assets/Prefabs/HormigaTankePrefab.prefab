@@ -577,10 +577,11 @@ MonoBehaviour:
   movementLerp: 4
   anim: {fileID: 4163397813253396129}
   animEvent: {fileID: 5954317861022801776}
+  splashSound: {fileID: 8300000, guid: 2dfac1093c1ca4941a98de7034c90dc1, type: 3}
   isAction: 0
   deadSound: {fileID: 8300000, guid: bb90e967dcf217642b85689e1dac5299, type: 3}
   attackSound:
-  - {fileID: 8300000, guid: 55f079259ce21de48a65b32ee04f59d8, type: 3}
+  - {fileID: 8300000, guid: ca8329e4712fa4440b0b6bbbf45921ad, type: 3}
   - {fileID: 8300000, guid: 5e9933a8594d71542995f989b8ab5b0e, type: 3}
   - {fileID: 8300000, guid: 5c3979f164c87c640a4b66d476c2a8ab, type: 3}
   hitPs: {fileID: 2007028099999889360}

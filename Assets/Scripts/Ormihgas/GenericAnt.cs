@@ -8,6 +8,7 @@ public abstract class GenericAnt : MonoBehaviour, IPauseable
     [SerializeField] float movementLerp = 3f;
     [SerializeField] protected Animator anim = null;
     [SerializeField] protected AnimEvent animEvent = null;
+    [SerializeField] protected AudioClip splashSound = null;
     Rigidbody rb;
     bool lerp;
     float lerping;
@@ -48,15 +49,14 @@ public abstract class GenericAnt : MonoBehaviour, IPauseable
         transform.forward = movement.normalized;
         if (!ObstacleSensor())
         {
+            if (lerp) return;
             initPos = transform.position;
             finalPos = transform.position + movement;
             lerp = true;
             anim.SetBool("Walk", true);
         }
         else
-        {
             GameManager.Instance.StopMovementAnt();
-        }
     }
 
     private void Update()

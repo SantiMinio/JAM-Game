@@ -16,7 +16,6 @@ public class CameraFollow : MonoBehaviour
     void Start()
     {
         _cam = Camera.main;
-        offset = transform.position;
         ants.AddRange(GameObject.FindObjectsOfType<GenericAnt>());
     }
 
