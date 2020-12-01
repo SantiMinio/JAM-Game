@@ -14,7 +14,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioSource audioSource = null;
     [SerializeField] AudioClip winSound = null;
     [SerializeField] AudioClip loseSound = null;
-    [SerializeField] GameObject leavePart;
+    [SerializeField] GameObject leavePart = null;
+    [SerializeField] GameObject gameplayButtons = null;
     int totalCollectables;
     public float gridSpacing = 1;
     int antCount;
@@ -77,13 +78,15 @@ public class GameManager : MonoBehaviour
     {
         if (inPause) return;
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            inPause = true;
-            uiManager.PauseScreen(true);
-            MusicManager.instance.PauseMusic();
-            pauseManager.Pause();
-        }
+        if (Input.GetKeyDown(KeyCode.Escape)) PauseGame();
+    }
+
+    public void PauseGame()
+    {
+        inPause = true;
+        uiManager.PauseScreen(true);
+        MusicManager.instance.PauseMusic();
+        pauseManager.Pause();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -124,6 +127,7 @@ public class GameManager : MonoBehaviour
 
     void Win()
     {
+        gameplayButtons.SetActive(false);
         controller.playing = false;
         MusicManager.instance.PauseMusic();
         audioSource.clip = winSound;
@@ -154,6 +158,7 @@ public class GameManager : MonoBehaviour
 
     void Lose()
     {
+        gameplayButtons.SetActive(false);
         controller.playing = false;
         MusicManager.instance.PauseMusic();
         audioSource.clip = loseSound;

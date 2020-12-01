@@ -44,23 +44,29 @@ public class ControllerBase : MonoBehaviour, IPauseable
 
         if (movementInCD) return;
 
-        if (Input.GetAxis("Vertical") != 0)
-        {
-            MovementInput(new Vector3(0, 0, gridSpacing * ClampToInt(Input.GetAxis("Vertical"))));
-            movementInCD = true;
-            //startCD = true;
-        }
-        else if (Input.GetAxis("Horizontal") != 0)
-        {
-            MovementInput(new Vector3(gridSpacing * ClampToInt(Input.GetAxis("Horizontal")), 0, 0));
-            movementInCD = true;
-            //startCD = true;
-        }
+        if (Input.GetAxis("Vertical") != 0) MoveVertical(ClampToInt(Input.GetAxis("Vertical")));
+        else if (Input.GetAxis("Horizontal") != 0) MoveHorizontal(ClampToInt(Input.GetAxis("Horizontal")));
     }
 
-    float ClampToInt(float num)
+    public void MoveHorizontal(int value)
     {
-        float result = 0;
+        if (isPaused || !playing || movementInCD) return;
+
+        MovementInput(new Vector3(gridSpacing * value, 0, 0));
+        movementInCD = true;
+    }
+
+    public void MoveVertical(int value)
+    {
+        if (isPaused || !playing || movementInCD) return;
+
+        MovementInput(new Vector3(0, 0, gridSpacing * value));
+        movementInCD = true;
+    }
+
+    int ClampToInt(float num)
+    {
+        int result = 0;
         if (num > 0) result = 1;
         else result = -1;
 

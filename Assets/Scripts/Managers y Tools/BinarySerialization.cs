@@ -5,9 +5,19 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class BinarySerialization
 {
+    public static string DataPath
+    {
+        get
+        {
+            if (Application.platform == RuntimePlatform.Android) return Application.persistentDataPath;
+            else return Application.dataPath;
+        }
+    }
+
+
     public static void Serialize<T>(string name, T data)
     {
-        FileStream file = File.Create(Application.dataPath + "/" + name + ".bin");
+        FileStream file = File.Create(DataPath + "/" + name + ".bin");
         var binary = new BinaryFormatter();
 
         binary.Serialize(file, data);
@@ -17,9 +27,9 @@ public static class BinarySerialization
 
     public static T Deserialize<T>(string name)
     {
-        if (File.Exists(Application.dataPath + "/" + name + ".bin"))
+        if (File.Exists(DataPath + "/" + name + ".bin"))
         {
-            FileStream file = File.Open(Application.dataPath + "/" + name + ".bin", FileMode.Open);
+            FileStream file = File.Open(DataPath + "/" + name + ".bin", FileMode.Open);
             var binary = new BinaryFormatter();
 
             T data = (T)binary.Deserialize(file);
@@ -35,5 +45,5 @@ public static class BinarySerialization
         }
     }
 
-    public static bool IsFileExist(string path) => File.Exists(Application.dataPath + "/" + path + ".bin");
+    public static bool IsFileExist(string path) => File.Exists(DataPath + "/" + path + ".bin");
 }
