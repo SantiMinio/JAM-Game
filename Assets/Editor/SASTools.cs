@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class FirstWindow :EditorWindow
+public class SASTools :EditorWindow
 {
     [MenuItem("CustomTools/SAS custom tools")]
     public static void OpenWindow() 
     {                  
-        FirstWindow myWindow = (FirstWindow)GetWindow(typeof(FirstWindow));       
+        SASTools myWindow = (SASTools)GetWindow(typeof(SASTools));       
         myWindow.Show();
     }
     private void OnGUI()
@@ -16,6 +16,10 @@ public class FirstWindow :EditorWindow
         if(GUILayout.Button("Open Level Editor Window"))
         {
             LvlEditorWindow.OpenWindow();
+        }
+        if(GUILayout.Button("Open Tile Editor Window"))
+        {
+
         }
     }
 }

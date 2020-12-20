@@ -5,7 +5,7 @@ using UnityEditor;
 public class NewLevelAlert : EditorWindow
 {
     private LvlEditorWindow Lvlwindow;
-    private GameObject currentLvl;
+    private GameObject currentLvl=default;
     private void OnGUI()
     {
         EditorGUILayout.LabelField("  A LevelSet already exists", EditorStyles.boldLabel);
@@ -22,12 +22,13 @@ public class NewLevelAlert : EditorWindow
                 GameObject prefab = PrefabUtility.LoadPrefabContents("Assets/Editor/LevelSet.prefab");
                 var g = Instantiate(prefab, Vector3.zero, Quaternion.Euler(Vector3.zero));
                 g.name = "LevelSet";
-
+                currentLvl = prefab;
             }
             else
             {
                 Instantiate(currentLvl, Vector3.zero, Quaternion.Euler(Vector3.zero));
             }
+            Lvlwindow.currentLevelSt = currentLvl;
             Lvlwindow.toogleButtons = true;
             Close();
         }
